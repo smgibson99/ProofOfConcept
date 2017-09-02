@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProofOfConcept.Views.LoginPage">
+
+     <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20,40,20,20"
+                    Android="20,20,20,20"
+                    WinPhone="20,20,20,20" />
+    </ContentPage.Padding>
+    
+    <ContentPage.Content>
+        <StackLayout 
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            Spacing="10">
+            
+            <Label Text="Please Login into the Application" HorizontalOptions="Center"/>
+            <Entry  x:Name="userId" Placeholder="User Id" Text="{Binding UserId}" Keyboard="Text" />
+            <Entry  x:Name="password" Placeholder="Password" Text="{Binding Password}" IsPassword="true" />
+            <Label x:Name="ErrorMessage" TextColor="Red" HorizontalTextAlignment="Center" />
+            <Button x:Name="callLogin" Text="Login" IsEnabled="True" Clicked="OnLogin" />
+            <Button x:Name="callRegister" Text="Register" IsEnabled="True" Clicked="OnRegister" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

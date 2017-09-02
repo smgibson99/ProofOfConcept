@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProofOfConcept.Views.RegisterPage">
+	 <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20,40,20,20"
+                    Android="20,20,20,20"
+                    WinPhone="20,20,20,20" />
+    </ContentPage.Padding>
+    
+    <ContentPage.Content>
+        <StackLayout 
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            Spacing="10">
+            
+            <Label Text="Please Register to the Application" HorizontalOptions="Center"/>
+            <Entry  x:Name="userId" Placeholder="User Id" Text="{Binding UserId}" Keyboard="Text" />
+            <Entry  x:Name="password" Placeholder="Password" Text="{Binding Password}" IsPassword="true" />
+            <Entry  x:Name="confirmPassword" Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="true" />
+            <Entry  x:Name="userName" Placeholder="Name" Text="{Binding UserName}" />
+            <Entry  x:Name="email" Placeholder="Email" Text="{Binding UserEmail}" />
+            <Label x:Name="ErrorMessage" TextColor="Red" HorizontalTextAlignment="Center" />
+            <Button x:Name="callOk" Text="Ok" IsEnabled="True" Clicked="OnOk" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

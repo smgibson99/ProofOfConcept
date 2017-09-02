@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProofOfConcept.Views.MenuPage">
+	<ContentPage.Padding>
+		<OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+	</ContentPage.Padding>
+	<ContentPage.Content>
+		<StackLayout BackgroundColor="Gray">
+			<Button Text="Home" TextColor="White" BackgroundColor="Green" Command="{Binding GoHomeCommand}" />
+			<Button x:Name="btnLogin" Text="Login" TextColor="White" BackgroundColor="Navy" Command="{Binding GoLoginCommand}" IsVisible="true"/>
+            <Button x:Name="btnLogout" Text="Logout" TextColor="White" BackgroundColor="Navy" Command="{Binding GoLogoutCommand}" IsVisible="false" />
+            <Button x:Name="btnUserSettings" Text="User Settings" TextColor="Black" BackgroundColor="Olive" Command="{Binding GoUserSettingsCommand}" IsVisible="false" />
+            <Button Text="Ideal Mates" TextColor="White" BackgroundColor="Purple" Command="{Binding GoIdealMatesCommand}" />
+            <Button Text="My Dates" TextColor="Black" BackgroundColor="Yellow" Command="{Binding GoMyDatesCommand}" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
