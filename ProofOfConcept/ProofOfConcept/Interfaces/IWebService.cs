@@ -8,74 +8,89 @@ namespace ProofOfConcept.Interfaces
 {
     public interface IWebService
     {
-        Task<User> Login(string userid, string password);
+        Task<User> LoginAsync(string userid, string password);
 
-        Task Logout();
+        Task LogoutAsync();
 
-        Task<User> Register(User user);
+        Task<User> RegisterAsync(User user);
 
-        Task<bool> UpdateUser(User user);
+        Task<User> GetUserAsync(string userId);
 
-        Task<bool> ChangePassword(string userid, string password, string newpassword);
+        Task<bool> UpdateUserAsync(User user);
+
+        Task<bool> ChangePasswordAsync(string userid, string password, string newpassword);
 
         //Config
-        Task<Config> GetConfig();
+        Task<Config> GetConfigAsync();
 
-        Task<Config> UpdateConfig(Config config);
+        Task<Config> UpdateConfigAsync(Config config);
 
         // Category
-        Task<ObservableCollection<Category>> GetCategories();
 
-        Task<Category> AddCategory(Category category);
+        Task<Category> GetCategoryAsync(string categoryName);
 
-        Task<bool> UpdateCategory(Category category);
+        Task<ObservableCollection<Category>> GetCategoriesAsync();
 
-        Task<bool> RemoveCategory(Category category);
+        Task<Category> AddCategoryAsync(Category category);
+
+        Task<bool> UpdateCategoryAsync(Category category);
+
+        Task<bool> RemoveCategoryAsync(Category category);
 
         // Quality
-        Task<ObservableCollection<Quality>> GetQualities();
+        Task<Quality> GetQualityAsync(string qualityName);
 
-        Task<Quality> AddQuality(Quality quality);
+        Task<ObservableCollection<Quality>> GetQualitiesAsync();
 
-        Task<bool> UpdateQuality(Quality quality);
+        Task<Quality> AddQualityAsync(Quality quality);
 
-        Task<bool> RemoveQuality(Quality quality);
+        Task<bool> UpdateQualityAsync(Quality quality);
+
+        Task<bool> RemoveQualityAsync(Quality quality);
 
         //Master Data
-        Task<ObservableCollection<MasterData>> GetMasterDatas();
+        Task<MasterData> GetMasterDataAsync(string qualityName, int sequenceNo);
 
-        Task<MasterData> AddMasterData(MasterData masterData);
+        Task<ObservableCollection<MasterData>> GetMasterDatasAsync();
 
-        Task<bool> UpdateMasterData(MasterData masterData);
+        Task<MasterData> AddMasterDataAsync(MasterData masterData);
 
-        Task<bool> RemoveMasterData(MasterData masterData);
+        Task<bool> UpdateMasterDataAsync(MasterData masterData);
+
+        Task<bool> RemoveMasterDataAsync(MasterData masterData);
 
         // Ideal Mate
-        Task<ObservableCollection<IdealMate>> GetIdealMates(string userId);
+        Task<IdealMate> GetIdealMateAsync(string userId, string qualityName);
 
-        Task<IdealMate> AddIdealMate(IdealMate idealMate);
+        Task<ObservableCollection<IdealMate>> GetIdealMatesAsync(string userId);
 
-        Task<bool> UpdateIdealMate(IdealMate idealMate);
+        Task<IdealMate> AddIdealMateAsync(IdealMate idealMate);
 
-        Task<bool> RemoveIdealMate(IdealMate idealMate);
+        Task<bool> UpdateIdealMateAsync(IdealMate idealMate);
+
+        Task<bool> RemoveIdealMateAsync(IdealMate idealMate);
 
         //Candidate
-        Task<ObservableCollection<Candidate>> GetCandidates(string userId);
+        Task<Candidate> GetCandidateAsync(string userId, string candidateName);
 
-        Task<Candidate> AddCandidate(Candidate candidate);
+        Task<ObservableCollection<Candidate>> GetCandidatesAsync(string userId);
 
-        Task<bool> UpdateCandidate(Candidate candidate);
+        Task<Candidate> AddCandidateAsync(Candidate candidate);
 
-        Task<bool> RemoveCandidate(Candidate candidate);
+        Task<bool> UpdateCandidateAsync(Candidate candidate);
+
+        Task<bool> RemoveCandidateAsync(Candidate candidate);
 
         //User Date
-        Task<ObservableCollection<UserDate>> GetUserDates(string userId);
+        Task<UserDate> GetUserDateAsync(string userId, string candidateName, DateTime dateOfDate, string qualityName);
 
-        Task<UserDate> AddUserDate(UserDate userDate);
+        Task<ObservableCollection<UserDate>> GetUserDatesAsync(string userId);
 
-        Task<bool> UpdateUserDate(UserDate userDate);
+        Task<UserDate> AddUserDateAsync(UserDate userDate);
 
-        Task<bool> RemoveUserDate(UserDate userDate);
+        Task<bool> UpdateUserDateAsync(UserDate userDate);
+
+        Task<bool> RemoveUserDateAsync(UserDate userDate);
 
     }
 }

@@ -38,7 +38,7 @@ namespace ProofOfConcept.ViewModels
         public string CategoryName { get; set; }
         public int AccessLevel { get; set; }
 
-        public async Task<ObservableCollection<Quality>> GetQualities()
+        public async Task<ObservableCollection<Quality>> GetQualitiesAsync()
         {
             if (settings.User == null)
             {
@@ -48,7 +48,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                Qualities = await service.GetQualities();
+                Qualities = await service.GetQualitiesAsync();
             }
             finally
             {
@@ -58,7 +58,7 @@ namespace ProofOfConcept.ViewModels
             return Qualities;
         }
 
-        public async Task<ObservableCollection<Category>> GetCategories()
+        public async Task<ObservableCollection<Category>> GetCategoriesAsync()
         {
             if (settings.User == null)
             {
@@ -68,7 +68,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                Categories = await service.GetCategories();
+                Categories = await service.GetCategoriesAsync();
             }
             finally
             {
@@ -77,7 +77,7 @@ namespace ProofOfConcept.ViewModels
             return Categories;
         }
 
-        public async Task AddQuality()
+        public async Task AddQualityAsync()
         {
             if (settings.User == null)
             {
@@ -97,7 +97,7 @@ namespace ProofOfConcept.ViewModels
 
             try
             {
-                var quality = await service.AddQuality(new Quality { QualityName = QualityName, CategoryName = CategoryName, AccessLevel = AccessLevel });
+                var quality = await service.AddQualityAsync(new Quality { QualityName = QualityName, CategoryName = CategoryName, AccessLevel = AccessLevel });
 
                 // update our local list of qualities
                 var qualitites = new List<Quality>();
@@ -122,7 +122,7 @@ namespace ProofOfConcept.ViewModels
 				return new Command(async () =>
 				{
 					IsRefreshing = true;
-					await GetQualities();
+					await GetQualitiesAsync();
 					IsRefreshing = false;
 				});
 			}

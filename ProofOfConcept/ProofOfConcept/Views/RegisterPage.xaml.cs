@@ -24,7 +24,7 @@ namespace ProofOfConcept.Views
 		{
 			try
 			{
-                await viewModel.Register();
+                await viewModel.RegisterAsync();
                 await this.Navigation.PopAsync();
 			}
 			catch (Exception ex)

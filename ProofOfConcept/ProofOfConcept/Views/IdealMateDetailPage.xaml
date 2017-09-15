@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProofOfConcept.Views.IdealMateDetailPage">
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20,40,20,20"
+                    Android="20,20,20,20"
+                    WinPhone="20,20,20,20" />
+    </ContentPage.Padding>
+    
+    <ContentPage.Content>
+        <StackLayout 
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            Spacing="10">
+            
+            <Label x:Name="title" Text="New Ideal Mate" HorizontalOptions="Center"/>
+            <Entry  x:Name="qualityName" Placeholder="Quality Name" Text="{Binding QualityName}" Keyboard="Text" />
+            <Entry  x:Name="scoreValue" Placeholder="Score Value" Text="{Binding ScoreValue}" Keyboard="Numeric" />
+            <Label x:Name="ErrorMessage" TextColor="Red" HorizontalTextAlignment="Center" />
+            <Button x:Name="callOk" Text="Ok" IsEnabled="True" Clicked="OnOk" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

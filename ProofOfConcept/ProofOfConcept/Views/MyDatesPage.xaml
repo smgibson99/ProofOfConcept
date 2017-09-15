@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProofOfConcept.Views.HomePage">
-
-    <ContentPage.Padding>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProofOfConcept.Views.MyDatesPage">
+	 <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="20,40,20,20"
                     Android="20,20,20,20"
@@ -19,9 +18,7 @@
 
         <!--    <Button x:Name="callLogin" Text="Login" IsEnabled="True" Clicked="OnClick" VerticalOptions="Start" HorizontalOptions="End"/> -->
 
-            <Label Text="Dating App" FontSize="Large"  VerticalOptions="Center" HorizontalOptions="Center" />
-            <Label x:Name="lblWelcomeMessage" Text="Not Logged In Yet!" FontSize="Large" FontAttributes="Italic" HorizontalOptions="Center" />
-             <Label Text="My Recent Dates" FontSize="Large"  VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Text="My Dates" FontSize="Large"  VerticalOptions="Center" HorizontalOptions="Center" />
             <Label x:Name="ErrorMessage" TextColor="Red" HorizontalTextAlignment="Center" />
             <ListView x:Name="DateView" 
                 ItemsSource="{Binding Candidates}" 
@@ -50,7 +47,6 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                 <MenuItem Clicked="OnEdit" Text="Edit"  CommandParameter="{Binding .}" IsDestructive="false" />
                                 <MenuItem Clicked="OnDelete" Text="Delete" CommandParameter="{Binding .}" IsDestructive="true" />
                             </ViewCell.ContextActions>
                             <ViewCell.View>
@@ -72,7 +68,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="New Date" Clicked="OnNew" />
         </StackLayout>
-	</ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>

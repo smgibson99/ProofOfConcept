@@ -18,7 +18,7 @@ namespace ProofOfConcept.ViewModels
         public int HighRatingEnd { get; set; }
         public string WelcomeMessage { get; set; }
 
-        public async Task GetConfig()
+        public async Task GetConfigAsync()
         {
             if (settings.User == null)
             {
@@ -28,7 +28,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                Configuration = await service.GetConfig();
+                Configuration = await service.GetConfigAsync();
             }
             finally
             {
@@ -36,7 +36,7 @@ namespace ProofOfConcept.ViewModels
             }
         }
 
-        public async Task UpdateConfig()
+        public async Task UpdateConfigAsync()
         {
             if (settings.User == null)
             {
@@ -78,7 +78,7 @@ namespace ProofOfConcept.ViewModels
 
             try
             {
-                Configuration = await service.UpdateConfig(new Config {Id=Configuration.Id, LowRatingBegin = LowRatingBegin, LowRatingEnd = LowRatingEnd, MedRatingBegin = MedRatingBegin, MedRatingEnd = MedRatingEnd, HighRatingBegin = HighRatingBegin, HighRatingEnd = HighRatingEnd, WelcomeMessage = WelcomeMessage });
+                Configuration = await service.UpdateConfigAsync(new Config {Id=Configuration.Id, LowRatingBegin = LowRatingBegin, LowRatingEnd = LowRatingEnd, MedRatingBegin = MedRatingBegin, MedRatingEnd = MedRatingEnd, HighRatingBegin = HighRatingBegin, HighRatingEnd = HighRatingEnd, WelcomeMessage = WelcomeMessage });
             }
             finally
             {

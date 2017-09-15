@@ -27,7 +27,7 @@ namespace ProofOfConcept.ViewModels
         public string CategoryName { get; set; }
         public int AccessLevel { get; set; }
 
-        public async Task<ObservableCollection<Category>> GetCategories()
+        public async Task<ObservableCollection<Category>> GetCategoriesAsync()
         {
             if (settings.User == null)
             {
@@ -37,7 +37,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                Categories = await service.GetCategories();
+                Categories = await service.GetCategoriesAsync();
             }
             finally
             {
@@ -46,7 +46,7 @@ namespace ProofOfConcept.ViewModels
             return Categories;
         }
 
-        public async Task AddCategory()
+        public async Task AddCategoryAsync()
         {
             if (settings.User == null)
             {
@@ -62,7 +62,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                var category = await service.AddCategory(new Category { CategoryName = CategoryName, AccessLevel = AccessLevel });
+                var category = await service.AddCategoryAsync(new Category { CategoryName = CategoryName, AccessLevel = AccessLevel });
 
                 // update our local list of categories
                 var categories = new List<Category>();
@@ -87,7 +87,7 @@ namespace ProofOfConcept.ViewModels
 				return new Command(async () =>
 				{
 					IsRefreshing = true;
-					await GetCategories();
+					await GetCategoriesAsync();
 					IsRefreshing = false;
 				});
 			}

@@ -35,13 +35,13 @@ namespace ProofOfConcept.Views
         {
             try
             {
-                await viewModel.Login();
+                await viewModel.LoginAsync();
 
                 if (App.settings?.User != null)
                 {
                     App.HomePage.WelcomeMessage = "Welcome, " + App.settings.User.UserName + "!";
-					App.MenuPage.DisableLogin();
-                    await App.HomePage.LoadData();
+                    App.MenuPage.DisableLogin();
+                    await App.HomePage.LoadDataAsync();
                 } else
                     App.HomePage.WelcomeMessage = "Not Logged In Yet!";
 
@@ -64,7 +64,7 @@ namespace ProofOfConcept.Views
             {
 				App.HomePage.WelcomeMessage = "Welcome, " + App.settings.User.UserName + "!";
 				App.MenuPage.DisableLogin();
-				await App.HomePage.LoadData();
+				await App.HomePage.LoadDataAsync();
 				await this.Navigation.PopAsync();
             } else
 				App.HomePage.WelcomeMessage = "Not Logged In Yet!";

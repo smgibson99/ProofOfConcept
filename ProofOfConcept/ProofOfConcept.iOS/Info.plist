@@ -52,5 +52,16 @@
 	<string>ProofOfConcept</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0a</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>mobilecenter-e1357532-cf71-48e0-ab94-fecc38e25174</string>
+			</array>
+			<key>CFBundleURLTypes</key>
+			<string>Viewer</string>
+		</dict>
+	</array>
 </dict>
 </plist>

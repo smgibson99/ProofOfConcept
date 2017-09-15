@@ -31,7 +31,7 @@ namespace ProofOfConcept.ViewModels
         public string AdviceHigh { get; set; }
         public int AccessLevel { get; set; }
 
-        public async Task<ObservableCollection<MasterData>> GetMasterDatas()
+        public async Task<ObservableCollection<MasterData>> GetMasterDatasAsync()
         {
             if (settings.User == null)
             {
@@ -41,7 +41,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                MasterDatas = await service.GetMasterDatas();
+                MasterDatas = await service.GetMasterDatasAsync();
             }
             finally
             {
@@ -50,7 +50,7 @@ namespace ProofOfConcept.ViewModels
             return MasterDatas;
         }
 
-        public async Task AddMasterData()
+        public async Task AddMasterDataAsync()
         {
             if (settings.User == null)
             {
@@ -70,7 +70,7 @@ namespace ProofOfConcept.ViewModels
 
             try
             {
-                var masterdata = await service.AddMasterData(new MasterData { QualityName = QualityName, SequenceNo = SequenceNo, AdviceLow = AdviceLow, AdviceMed = AdviceMed, AdviceHigh = AdviceHigh, AccessLevel = AccessLevel });
+                var masterdata = await service.AddMasterDataAsync(new MasterData { QualityName = QualityName, SequenceNo = SequenceNo, AdviceLow = AdviceLow, AdviceMed = AdviceMed, AdviceHigh = AdviceHigh, AccessLevel = AccessLevel });
 
                 // update our local list of candidates
                 var masterdatas = new List<MasterData>();
@@ -95,7 +95,7 @@ namespace ProofOfConcept.ViewModels
 				return new Command(async () =>
 				{
 					IsRefreshing = true;
-					await GetMasterDatas();
+					await GetMasterDatasAsync();
 					IsRefreshing = false;
 				});
 			}

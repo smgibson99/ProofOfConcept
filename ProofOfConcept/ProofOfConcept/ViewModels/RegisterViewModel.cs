@@ -17,7 +17,7 @@ namespace ProofOfConcept.ViewModels
 
         public string ConfirmPassword { get; set; }
 
-        public async Task Register()
+        public async Task RegisterAsync()
         {
             if (string.IsNullOrEmpty(UserId))
                 throw new Exception("UserId is blank.");
@@ -34,7 +34,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                settings.User = await service.Register(new User { UserId = UserId, UserName = UserName, Password = Password, UserEmail = UserEmail, AccessLevel = 1 });
+                settings.User = await service.RegisterAsync(new User { UserId = UserId, UserName = UserName, Password = Password, UserEmail = UserEmail, AccessLevel = 1 });
                 settings.Save();
             }
             finally

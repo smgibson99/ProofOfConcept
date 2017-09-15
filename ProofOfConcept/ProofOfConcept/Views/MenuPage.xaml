@@ -9,8 +9,8 @@
 			<Button x:Name="btnLogin" Text="Login" TextColor="White" BackgroundColor="Navy" Command="{Binding GoLoginCommand}" IsVisible="true"/>
             <Button x:Name="btnLogout" Text="Logout" TextColor="White" BackgroundColor="Navy" Command="{Binding GoLogoutCommand}" IsVisible="false" />
             <Button x:Name="btnUserSettings" Text="User Settings" TextColor="Black" BackgroundColor="Olive" Command="{Binding GoUserSettingsCommand}" IsVisible="false" />
-            <Button Text="Ideal Mates" TextColor="White" BackgroundColor="Purple" Command="{Binding GoIdealMatesCommand}" />
-            <Button Text="My Dates" TextColor="Black" BackgroundColor="Yellow" Command="{Binding GoMyDatesCommand}" />
+            <Button x:Name="btnIdealMates" Text="Ideal Mates" TextColor="White" BackgroundColor="Purple" Command="{Binding GoIdealMatesCommand}" IsVisible="false" />
+            <Button x:Name="btnMyDates" Text="My Dates" TextColor="Black" BackgroundColor="Yellow" Command="{Binding GoMyDatesCommand}"  IsVisible="false"/>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

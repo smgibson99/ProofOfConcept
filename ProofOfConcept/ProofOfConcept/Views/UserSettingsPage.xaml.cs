@@ -24,7 +24,7 @@ namespace ProofOfConcept.Views
             
 			try
 			{
-                await viewModel.UpdateUser();
+                await viewModel.UpdateUserAsync();
 				await this.Navigation.PopAsync();
 			}
 			catch (Exception ex)

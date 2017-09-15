@@ -19,16 +19,17 @@ namespace ProofOfConcept.Fakes
             fakeRepository = new FakeRepository();
         }
 
-        private Task Sleep()
+        private Task SleepAsync()
         {
             return Task.Delay(SleepDuration);
         }
 
-        public async Task<User> Login(string userid, string password)
+        //Users
+        public async Task<User> LoginAsync(string userid, string password)
         {
-            await Logout();
+            await LogoutAsync();
 
-            await Sleep();
+            await SleepAsync();
 
             foreach (User user in fakeRepository.users)
             {
@@ -42,11 +43,20 @@ namespace ProofOfConcept.Fakes
             return App.settings.User;
         }
 
-        public async Task<User> Register(User user)
+        public async Task<User> GetUserAsync(string userId)
         {
-            await Sleep();
+            await SleepAsync();
 
-            await Logout();
+            User user = fakeRepository.users.Single(r => r.UserId.Equals(userId));
+
+            return user;
+        }
+
+        public async Task<User> RegisterAsync(User user)
+        {
+            await SleepAsync();
+
+            await LogoutAsync();
 
             if (fakeRepository.users.Contains(user))
                 throw new Exception("User Exists Already!");
@@ -58,11 +68,11 @@ namespace ProofOfConcept.Fakes
             return user;
         }
 
-        public async Task<bool> UpdateUser(User user)
+        public async Task<bool> UpdateUserAsync(User user)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.users.Contains(user))
             {
@@ -76,12 +86,12 @@ namespace ProofOfConcept.Fakes
             return found;
         }
 
-        public async Task<bool> ChangePassword(string userid, string password, string newpassword)
+        public async Task<bool> ChangePasswordAsync(string userid, string password, string newpassword)
         {
             bool result = false;
             User foundUser = null;
 
-			await Sleep();
+			await SleepAsync();
 
 			foreach (User user in fakeRepository.users)
 			{
@@ -104,39 +114,50 @@ namespace ProofOfConcept.Fakes
             return result;
 		}
 
-        public async Task  Logout()
+        public async Task  LogoutAsync()
         {
-            await Sleep();
+            await SleepAsync();
             App.settings.User = null;
             if (App.HomePage != null)
                 App.HomePage.ClearList();
         }
 
-        public async Task<Config> GetConfig()
+        //Config
+        public async Task<Config> GetConfigAsync()
         {
-            await Sleep();
+            await SleepAsync();
 
             return fakeRepository.configuration;
         }
 
-        public async Task<Config> UpdateConfig(Config config)
+        public async Task<Config> UpdateConfigAsync(Config config)
         {
-            await Sleep();
+            await SleepAsync();
 
             fakeRepository.configuration = config;
             return config;
         }
 
-        public async Task<ObservableCollection<Category>> GetCategories()
+        //Categories
+        public async Task<Category> GetCategoryAsync(string categoryName)
         {
-            await Sleep();
+            await SleepAsync();
 
-            return new ObservableCollection<Category>(fakeRepository.categories);
+            Category category = fakeRepository.categories.Single(r => r.CategoryName.Equals(categoryName));
+
+            return category;
         }
 
-        public async Task<Category> AddCategory(Category category)
+        public async Task<ObservableCollection<Category>> GetCategoriesAsync()
         {
-            await Sleep();
+            await SleepAsync();
+
+            return new ObservableCollection<Category>(fakeRepository.categories.OrderBy(r => r.CategoryName));
+        }
+
+        public async Task<Category> AddCategoryAsync(Category category)
+        {
+            await SleepAsync();
 
             category.Id = Guid.NewGuid().ToString();
             fakeRepository.categories.Add(category);
@@ -144,11 +165,11 @@ namespace ProofOfConcept.Fakes
             return category;
         }
 
-        public async Task<bool> UpdateCategory(Category category)
+        public async Task<bool> UpdateCategoryAsync(Category category)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.categories.Contains(category))
             {
@@ -160,11 +181,11 @@ namespace ProofOfConcept.Fakes
             return found;
         }
 
-        public async Task<bool> RemoveCategory(Category category)
+        public async Task<bool> RemoveCategoryAsync(Category category)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.categories.Contains(category))
             {
@@ -175,16 +196,26 @@ namespace ProofOfConcept.Fakes
 
         }
 
-        public async Task<ObservableCollection<Quality>> GetQualities()
+        //Qualities
+        public async Task<Quality> GetQualityAsync(string qualityName)
         {
-            await Sleep();
+            await SleepAsync();
 
-            return new ObservableCollection<Quality>(fakeRepository.qualities);
+            Quality quality = fakeRepository.qualities.Single(r => r.QualityName.Equals(qualityName));
+
+            return quality;
         }
 
-        public async Task<Quality> AddQuality(Quality quality)
+        public async Task<ObservableCollection<Quality>> GetQualitiesAsync()
         {
-            await Sleep();
+            await SleepAsync();
+
+            return new ObservableCollection<Quality>(fakeRepository.qualities.OrderBy(r => r.CategoryName).ThenBy(r => r.QualityName));
+        }
+
+        public async Task<Quality> AddQualityAsync(Quality quality)
+        {
+            await SleepAsync();
 
             quality.Id = Guid.NewGuid().ToString();
             fakeRepository.qualities.Add(quality);
@@ -192,11 +223,11 @@ namespace ProofOfConcept.Fakes
             return quality;
         }
 
-        public async Task<bool> UpdateQuality(Quality quality)
+        public async Task<bool> UpdateQualityAsync(Quality quality)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.qualities.Contains(quality))
             {
@@ -208,11 +239,11 @@ namespace ProofOfConcept.Fakes
             return found;
         }
 
-        public async Task<bool> RemoveQuality(Quality quality)
+        public async Task<bool> RemoveQualityAsync(Quality quality)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.qualities.Contains(quality))
             {
@@ -222,16 +253,26 @@ namespace ProofOfConcept.Fakes
             return found;
         }
 
-        public async Task<ObservableCollection<MasterData>> GetMasterDatas()
+        //Master Data
+        public async Task<MasterData> GetMasterDataAsync(string qualityName, int sequenceNo)
         {
-            await Sleep();
+            await SleepAsync();
 
-            return new ObservableCollection<MasterData>(fakeRepository.masterDatas);
+            MasterData masterData = fakeRepository.masterDatas.Single(r => r.QualityName.Equals(qualityName) && r.SequenceNo == sequenceNo);
+
+            return masterData;
         }
 
-        public async Task<MasterData> AddMasterData(MasterData masterData)
+        public async Task<ObservableCollection<MasterData>> GetMasterDatasAsync()
         {
-            await Sleep();
+            await SleepAsync();
+
+            return new ObservableCollection<MasterData>(fakeRepository.masterDatas.OrderBy(r => r.QualityName).ThenBy(r => r.SequenceNo));
+        }
+
+        public async Task<MasterData> AddMasterDataAsync(MasterData masterData)
+        {
+            await SleepAsync();
 
             masterData.Id = Guid.NewGuid().ToString();
             fakeRepository.masterDatas.Add(masterData);
@@ -239,11 +280,11 @@ namespace ProofOfConcept.Fakes
             return masterData;
         }
 
-        public async Task<bool> UpdateMasterData(MasterData masterData)
+        public async Task<bool> UpdateMasterDataAsync(MasterData masterData)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.masterDatas.Contains(masterData))
             {
@@ -255,11 +296,11 @@ namespace ProofOfConcept.Fakes
             return found;
         }
 
-        public async Task<bool> RemoveMasterData(MasterData masterData)
+        public async Task<bool> RemoveMasterDataAsync(MasterData masterData)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.masterDatas.Contains(masterData))
             {
@@ -269,16 +310,26 @@ namespace ProofOfConcept.Fakes
             return found;
         }
 
-        public async Task<ObservableCollection<IdealMate>> GetIdealMates(string userId)
+        //Ideal Mates
+        public async Task<IdealMate> GetIdealMateAsync(string userId, string qualityName)
         {
-            await Sleep();
+            await SleepAsync();
 
-            return new ObservableCollection<IdealMate>(fakeRepository.idealMates.Where(i => i.UserId.Equals(userId)));
+            IdealMate idealMate = fakeRepository.idealMates.Single(r => r.UserId.Equals(userId) && r.QualityName.Equals(qualityName));
+
+            return idealMate;
         }
 
-        public async Task<IdealMate> AddIdealMate(IdealMate idealMate)
+        public async Task<ObservableCollection<IdealMate>> GetIdealMatesAsync(string userId)
         {
-            await Sleep();
+            await SleepAsync();
+
+            return new ObservableCollection<IdealMate>(fakeRepository.idealMates.Where(i => i.UserId.Equals(userId)).OrderBy(c => c.QualityName));
+        }
+
+        public async Task<IdealMate> AddIdealMateAsync(IdealMate idealMate)
+        {
+            await SleepAsync();
 
             idealMate.Id = Guid.NewGuid().ToString();
             fakeRepository.idealMates.Add(idealMate);
@@ -286,11 +337,11 @@ namespace ProofOfConcept.Fakes
             return idealMate;
         }
 
-        public async Task<bool> UpdateIdealMate(IdealMate idealMate)
+        public async Task<bool> UpdateIdealMateAsync(IdealMate idealMate)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.idealMates.Contains(idealMate))
             {
@@ -302,30 +353,40 @@ namespace ProofOfConcept.Fakes
             return found;
         }
 
-        public async Task<bool> RemoveIdealMate(IdealMate idealMate)
+        public async Task<bool> RemoveIdealMateAsync(IdealMate idealMate)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.idealMates.Contains(idealMate))
             {
                 found = fakeRepository.idealMates.Remove(idealMate);
-            }
+            } 
 
             return found;
         }
 
-        public async Task<ObservableCollection<Candidate>> GetCandidates(string userId)
+        //Candidates
+        public async Task<Candidate> GetCandidateAsync(string userId, string candidateName)
         {
-            await Sleep();
+            await SleepAsync();
 
-            return new ObservableCollection<Candidate>(fakeRepository.candidates.Where(c => c.UserId.Equals(userId)));
+            Candidate candidate = fakeRepository.candidates.Single(r => r.UserId.Equals(userId) && r.CandidateName.Equals(candidateName));
+
+            return candidate;
         }
 
-        public async Task<Candidate> AddCandidate(Candidate candidate)
+        public async Task<ObservableCollection<Candidate>> GetCandidatesAsync(string userId)
         {
-            await Sleep();
+            await SleepAsync();
+
+            return new ObservableCollection<Candidate>(fakeRepository.candidates.Where(c => c.UserId.Equals(userId)).OrderBy(c => c.CandidateName));
+        }
+
+        public async Task<Candidate> AddCandidateAsync(Candidate candidate)
+        {
+            await SleepAsync();
 
             candidate.Id = Guid.NewGuid().ToString();
             fakeRepository.candidates.Add(candidate);
@@ -333,11 +394,11 @@ namespace ProofOfConcept.Fakes
             return candidate;
         }
 
-        public async Task<bool> UpdateCandidate(Candidate candidate)
+        public async Task<bool> UpdateCandidateAsync(Candidate candidate)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.candidates.Contains(candidate))
             {
@@ -349,30 +410,45 @@ namespace ProofOfConcept.Fakes
             return found;
         }
 
-        public async Task<bool> RemoveCandidate(Candidate candidate)
+        public async Task<bool> RemoveCandidateAsync(Candidate candidate)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.candidates.Contains(candidate))
             {
-                found = fakeRepository.candidates.Remove(candidate);
+                //check for existence of dates for this candidate
+                var userDates = fakeRepository.userDates.Where(r => r.UserId.Equals(candidate.UserId) && r.CandidateName.Equals(candidate.CandidateName));
+                if (userDates.Count() == 0)
+                    found = fakeRepository.candidates.Remove(candidate);
+                else
+                    throw new Exception("Candidate has existing date records!");
             }
 
             return found;
         }
 
-        public async Task<ObservableCollection<UserDate>> GetUserDates(string userId)
+        //User Dates
+        public async Task<UserDate> GetUserDateAsync(string userId, string candidateName, DateTime dateOfDate, string qualityName)
         {
-            await Sleep();
+            await SleepAsync();
 
-            return new ObservableCollection<UserDate>(fakeRepository.userDates.Where(u => u.UserId.Equals(userId)));
+            UserDate userDate = fakeRepository.userDates.Single(r => r.UserId.Equals(userId) && r.CandidateName.Equals(candidateName) && r.DateOfDate.Equals(dateOfDate) && r.QualityName.Equals(qualityName));
+
+            return userDate;
         }
 
-        public async Task<UserDate> AddUserDate(UserDate userDate)
+        public async Task<ObservableCollection<UserDate>> GetUserDatesAsync(string userId)
         {
-            await Sleep();
+            await SleepAsync();
+
+            return new ObservableCollection<UserDate>(fakeRepository.userDates.Where(u => u.UserId.Equals(userId)).OrderBy(r => r.CandidateName).ThenBy(r => r.DateOfDate).ThenBy(r => r.QualityName));
+        }
+
+        public async Task<UserDate> AddUserDateAsync(UserDate userDate)
+        {
+            await SleepAsync();
 
             userDate.Id = Guid.NewGuid().ToString();
             fakeRepository.userDates.Add(userDate);
@@ -380,11 +456,11 @@ namespace ProofOfConcept.Fakes
             return userDate;
         }
 
-        public async Task<bool> UpdateUserDate(UserDate userDate)
+        public async Task<bool> UpdateUserDateAsync(UserDate userDate)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.userDates.Contains(userDate))
             {
@@ -396,11 +472,11 @@ namespace ProofOfConcept.Fakes
             return found;
         }
 
-        public async Task<bool> RemoveUserDate(UserDate userDate)
+        public async Task<bool> RemoveUserDateAsync(UserDate userDate)
         {
             bool found = false;
 
-            await Sleep();
+            await SleepAsync();
 
             if (fakeRepository.userDates.Contains(userDate))
             {

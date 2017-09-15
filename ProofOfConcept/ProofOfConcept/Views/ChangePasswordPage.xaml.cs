@@ -23,7 +23,7 @@ namespace ProofOfConcept.Views
 
 			try
 			{
-                await viewModel.ChangePassword();
+                await viewModel.ChangePasswordAsync();
 				await this.Navigation.PopAsync();
 			}
 			catch (Exception ex)

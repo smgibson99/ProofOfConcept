@@ -14,48 +14,48 @@ namespace ProofOfConcept.ViewModels {
         public ICommand GoMyDatesCommand { get; set; }
 
 		public MenuPageViewModel() {
-			GoHomeCommand = new Command(GoHome);
-			GoLoginCommand = new Command(GoLogin);
-            GoLogoutCommand = new Command(GoLogout);
-            GoUserSettingsCommand = new Command(GoUserSettings);
-            GoIdealMatesCommand = new Command(GoIdealMates);
-            GoMyDatesCommand = new Command(GoMyDates);
+			GoHomeCommand = new Command(GoHomeAsync);
+			GoLoginCommand = new Command(GoLoginAsync);
+            GoLogoutCommand = new Command(GoLogoutAsync);
+            GoUserSettingsCommand = new Command(GoUserSettingsAsync);
+            GoIdealMatesCommand = new Command(GoIdealMatesAsync);
+            GoMyDatesCommand = new Command(GoMyDatesAsync);
 		}
 
-		async void GoHome(object obj) {
+		async void GoHomeAsync(object obj) {
 			await App.NavigationPage.Navigation.PopToRootAsync();
 			App.MenuIsPresented = false;
 		}
 
-		async void GoLogin(object obj) {
+		async void GoLoginAsync(object obj) {
             await App.NavigationPage.Navigation.PushAsync(new LoginPage());
 			App.MenuIsPresented = false;
 		}
 
-		async void GoLogout(object obj)
+		async void GoLogoutAsync(object obj)
 		{
-            await App.service.Logout();
+            await App.service.LogoutAsync();
 
             App.MenuPage.EnableLogin();
 
             App.HomePage.WelcomeMessage = "Not Logged In Yet!";
 		}
 
-		async void GoUserSettings(object obj)
+		async void GoUserSettingsAsync(object obj)
 		{
             await App.NavigationPage.Navigation.PushAsync(new UserSettingsPage());
 			App.MenuIsPresented = false;
 		}
 
-		async void GoIdealMates(object obj)
+		async void GoIdealMatesAsync(object obj)
 		{
-		//	App.NavigationPage.Navigation.PushAsync(new IdealMatesPage());
+			await App.NavigationPage.Navigation.PushAsync(new IdealMatesPage());
 			App.MenuIsPresented = false;
 		}
 
-        async void GoMyDates(object obj)
+        async void GoMyDatesAsync(object obj)
         {
-            // App.NavigationPage.Navigation.PushAsync(new UserDates());
+            await App.NavigationPage.Navigation.PushAsync(new MyDatesPage());
             App.MenuIsPresented = false;
         }
 	}

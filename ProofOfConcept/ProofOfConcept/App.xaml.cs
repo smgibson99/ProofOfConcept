@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
+using Microsoft.Azure.Mobile.Distribute;
 
 using Xamarin.Forms;
 using ProofOfConcept.Views;
@@ -56,7 +57,7 @@ namespace ProofOfConcept
         {
 
             // Handle when your app starts
-            MobileCenter.Start("ios=e1357532-cf71-48e0-ab94-fecc38e25174;",typeof(Analytics),typeof(Crashes));
+            MobileCenter.Start("ios=e1357532-cf71-48e0-ab94-fecc38e25174;",typeof(Analytics),typeof(Crashes),typeof(Distribute));
         }
 
         protected override void OnSleep()

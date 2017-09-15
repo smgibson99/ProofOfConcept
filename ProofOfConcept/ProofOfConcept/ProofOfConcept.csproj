@@ -95,6 +95,26 @@
     <Compile Include="Views\CandidateDetailPage.xaml.cs">
       <DependentUpon>CandidateDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CandidateDatesPage.xaml.cs">
+      <DependentUpon>CandidateDatesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CandidateDate.cs" />
+    <Compile Include="ViewModels\CandidateDateViewModel.cs" />
+    <Compile Include="Views\UserDatePage.xaml.cs">
+      <DependentUpon>UserDatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IdealMatesPage.xaml.cs">
+      <DependentUpon>IdealMatesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IdealMateDetailPage.xaml.cs">
+      <DependentUpon>IdealMateDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserDateDetailPage.xaml.cs">
+      <DependentUpon>UserDateDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MyDatesPage.xaml.cs">
+      <DependentUpon>MyDatesPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainPage.xaml">
@@ -127,6 +147,24 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CandidateDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CandidateDatesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserDatePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\IdealMatesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\IdealMateDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserDateDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MyDatesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

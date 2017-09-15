@@ -16,6 +16,7 @@ namespace ProofOfConcept.Views {
     {
 
         Config configuration { get; set; }
+        bool InSelect { get; set; } = false;
 
         CandidateViewModel viewModel = new CandidateViewModel();
        
@@ -32,14 +33,7 @@ namespace ProofOfConcept.Views {
 
             BindingContext = viewModel;
 
-			if (App.settings?.User == null)
-			{
-                DisplayLogin();
-            } else
-            {
-                // load the data for the view
-               LoadData();
-            }
+			
 
         }
 
@@ -47,41 +41,46 @@ namespace ProofOfConcept.Views {
         {
             base.OnAppearing();
 
-            // load the view
-
-            viewModel = new CandidateViewModel();
-
+            // load the viewdata
+            ErrorMessage.Text = "";
 			
             try
             {
-                DateView.ItemsSource = await viewModel.GetCandidates();
+				if (App.settings?.User == null)
+				{
+					await DisplayLoginAsync();
+				}
+				else
+				{
+					// load the data for the view
+					await LoadDataAsync();
+				}
+                DateView.ItemsSource = await viewModel.GetCandidatesWithDatesAsync();
+
             } catch (Exception e)
             {
-                // do nothing
+                ErrorMessage.Text = e.Message;
             }
 			
         }
 
-        async Task OnDisappearing(object sender, EventArgs e)
-        {
-            
-        }
 
-        async Task DisplayLogin()
+        async Task DisplayLoginAsync()
         {
             await Navigation.PushAsync(new LoginPage());
-            await LoadData();
+            await LoadDataAsync();
         }
 
-        public async Task LoadData()
+        public async Task LoadDataAsync()
         {
 			try
 			{
-                DateView.ItemsSource = await viewModel.GetCandidates();
+                DateView.ItemsSource = await viewModel.GetCandidatesWithDatesAsync();
+                ErrorMessage.Text = "";
 			}
 			catch (Exception e)
 			{
-				// no processing
+                ErrorMessage.Text = e.Message;
 			}
         }
 
@@ -95,17 +94,62 @@ namespace ProofOfConcept.Views {
         public async void OnSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var candidate = e.SelectedItem as Candidate;
-            // call the candidate detail page
+            // call the candidate dates page
 
             DateView.SelectedItem = null;
+
+            if (!InSelect)
+            {
+                InSelect = true;
+                ErrorMessage.Text = "";
+                await Navigation.PushAsync(new CandidateDatesPage(candidate));
+                InSelect = false;
+            }
         }
+
+		public async void OnNew(object sender, SelectedItemChangedEventArgs e)
+		{
+			ErrorMessage.Text = "";
+			try
+			{
+				await Navigation.PushAsync(new CandidateDetailPage());
+				ErrorMessage.Text = "";
+			}
+			catch (Exception ex)
+			{
+				ErrorMessage.Text = ex.Message;
+			}
+		}
+
+		public async void OnEdit(object sender, SelectedItemChangedEventArgs e)
+		{
+			var mi = ((MenuItem)sender);
+			var candidate = mi.CommandParameter as Candidate;
+			ErrorMessage.Text = "";
+			try
+			{
+                await Navigation.PushAsync(new CandidateDetailPage(candidate));
+				ErrorMessage.Text = "";
+			}
+			catch (Exception ex)
+			{
+				ErrorMessage.Text = ex.Message;
+			}
+		}
 
 		public async void OnDelete(object sender, SelectedItemChangedEventArgs e)
 		{
 			var mi = ((MenuItem)sender);
             var candidate = mi.CommandParameter as Candidate;
-           // await viewModel.DeleteCandidate(candidate);
-			// call the candidate detail function
+            ErrorMessage.Text = "";
+            try
+            {
+                await viewModel.DeleteCandidateAsync(candidate);
+                ErrorMessage.Text = "";
+            } catch (Exception ex)
+            {
+                ErrorMessage.Text = ex.Message;
+            }
 		}
     }
 }

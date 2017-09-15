@@ -13,7 +13,7 @@ namespace ProofOfConcept.ViewModels
 
         public string Password { get; set; }
 
-        public async Task Login()
+        public async Task LoginAsync()
         {
             if (string.IsNullOrEmpty(UserId))
                 throw new Exception("UserId is blank.");
@@ -24,7 +24,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                settings.User = await service.Login(UserId, Password);
+                settings.User = await service.LoginAsync(UserId, Password);
                 if (settings?.User == null)
                     throw new Exception("User Not Found!");
                 settings.Save();

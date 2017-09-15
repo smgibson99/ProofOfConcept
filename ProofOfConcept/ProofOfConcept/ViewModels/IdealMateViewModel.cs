@@ -27,7 +27,7 @@ namespace ProofOfConcept.ViewModels
         public string QualityName { get; set; }
         public int ScoreValue { get; set; }
 
-        public async Task<ObservableCollection<IdealMate>> GetIdealMates()
+        public async Task<ObservableCollection<IdealMate>> GetIdealMatesAsync()
         {
             if (settings.User == null)
             {
@@ -37,7 +37,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                IdealMates = await service.GetIdealMates(settings.User.UserId);
+                IdealMates = await service.GetIdealMatesAsync(settings.User.UserId);
             }
             finally
             {
@@ -46,7 +46,7 @@ namespace ProofOfConcept.ViewModels
             return IdealMates;
         }
 
-        public async Task AddIdealMate()
+        public async Task AddIdealMateAsync()
         {
             if (settings.User == null)
             {
@@ -64,7 +64,7 @@ namespace ProofOfConcept.ViewModels
             IsBusy = true;
             try
             {
-                var idealmate = await service.AddIdealMate(new IdealMate { UserId = settings.User.UserId, QualityName = QualityName, ScoreValue = ScoreValue});
+                var idealmate = await service.AddIdealMateAsync(new IdealMate { UserId = settings.User.UserId, QualityName = QualityName, ScoreValue = ScoreValue});
 
                 // update our local list of candidates
                 var idealmates = new List<IdealMate>();
@@ -82,6 +82,62 @@ namespace ProofOfConcept.ViewModels
 
 		//TODO: Add other operations
 
+		public async Task UpdateIdealMateAsync()
+		{
+			if (settings.User == null)
+			{
+				throw new Exception("Not logged in.");
+			}
+
+			if (string.IsNullOrEmpty(QualityName))
+				throw new Exception("Quality Name is blank.");
+
+			if (ScoreValue < 0 || ScoreValue > 10)
+			{
+				throw new Exception("Score Value must be in range 0 to 10");
+			}
+
+			IsBusy = true;
+			try
+			{
+                IdealMate idealMate = new IdealMate { UserId = settings.User.UserId, QualityName = QualityName, ScoreValue = ScoreValue };
+
+                var result = await service.UpdateIdealMateAsync(idealMate);
+
+                if (result)
+                {
+                    await GetIdealMatesAsync();
+                }
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+
+
+        public async Task DeleteIdealMateAsync(IdealMate idealMate)
+        {
+			if (settings.User == null)
+			{
+				throw new Exception("Not logged in.");
+			}
+
+            if (idealMate == null)
+                return;
+
+            IsBusy = true;
+
+            try
+            {
+                var result = await service.RemoveIdealMateAsync(idealMate);
+                await GetIdealMatesAsync();
+            } finally
+            {
+                IsBusy = false;
+            }
+        }
+
 		public ICommand RefreshCommand
 		{
 			get
@@ -89,7 +145,7 @@ namespace ProofOfConcept.ViewModels
 				return new Command(async () =>
 				{
 					IsRefreshing = true;
-                    await GetIdealMates();
+                    await GetIdealMatesAsync();
 					IsRefreshing = false;
 				});
 			}

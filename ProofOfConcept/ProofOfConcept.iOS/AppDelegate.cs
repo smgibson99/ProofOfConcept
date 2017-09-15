@@ -7,6 +7,7 @@ using UIKit;
 using ProofOfConcept.Interfaces;
 using ProofOfConcept.ViewModels;
 using ProofOfConcept.Fakes;
+using Microsoft.Azure.Mobile.Distribute;
 
 namespace ProofOfConcept.iOS
 {
@@ -31,6 +32,8 @@ namespace ProofOfConcept.iOS
          //  ServiceContainer.Register<ISettings>(() => new FakeSettings());
          //   ServiceContainer.Register<IWebService>(() => new FakeWebService());
            // ServiceContainer.Register<LoginViewModel>(() => new LoginViewModel());
+
+            Distribute.DontCheckForUpdatesInDebug();
 
             LoadApplication(new App());
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProofOfConcept.Views.HomePage">
-
-    <ContentPage.Padding>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProofOfConcept.Views.UserDatePage">
+	<ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="20,40,20,20"
                     Android="20,20,20,20"
@@ -17,14 +16,13 @@
             Spacing="15"
             >
 
-        <!--    <Button x:Name="callLogin" Text="Login" IsEnabled="True" Clicked="OnClick" VerticalOptions="Start" HorizontalOptions="End"/> -->
 
-            <Label Text="Dating App" FontSize="Large"  VerticalOptions="Center" HorizontalOptions="Center" />
-            <Label x:Name="lblWelcomeMessage" Text="Not Logged In Yet!" FontSize="Large" FontAttributes="Italic" HorizontalOptions="Center" />
-             <Label Text="My Recent Dates" FontSize="Large"  VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Text="Date Detail" FontSize="Large"  VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label x:Name="lblCandidateName" FontSize="Large" FontAttributes="Italic" HorizontalOptions="Center"/>
+            <Label x:Name="lblDateOfDate" FontSize="Large" FontAttributes="Italic" HorizontalOptions="Center"/>
             <Label x:Name="ErrorMessage" TextColor="Red" HorizontalTextAlignment="Center" />
             <ListView x:Name="DateView" 
-                ItemsSource="{Binding Candidates}" 
+                ItemsSource="{Binding CandidateDates}" 
                 IsPullToRefreshEnabled="true" 
                 RefreshCommand="{Binding RefreshCommand}" 
                 IsRefreshing="{Binding IsRefreshing}" 
@@ -37,20 +35,17 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*" />
-                            <ColumnDefinition Width="10*" />
+                            <ColumnDefinition Width="20*" />
                             <ColumnDefinition Width="10*" />
                         </Grid.ColumnDefinitions>
-                        <Label Text="Name"  FontAttributes="Bold" Grid.Column="0" />
-                        <Label Text="Last Date" FontAttributes="Bold" Grid.Column="1" />
-                        <Label Text="Rating"  FontAttributes="Bold" Grid.Column="2" />
+                        <Label Text="Quality"  FontAttributes="Bold" Grid.Column="0" />
+                        <Label Text="Score"  FontAttributes="Bold" Grid.Column="1" />
                     </Grid>
                 </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                 <MenuItem Clicked="OnEdit" Text="Edit"  CommandParameter="{Binding .}" IsDestructive="false" />
                                 <MenuItem Clicked="OnDelete" Text="Delete" CommandParameter="{Binding .}" IsDestructive="true" />
                             </ViewCell.ContextActions>
                             <ViewCell.View>
@@ -59,20 +54,17 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="10*" />
-                                    <ColumnDefinition Width="10*" />
+                                    <ColumnDefinition Width="20*" />
                                     <ColumnDefinition Width="10*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding CandidateName}" Grid.Column="0"/>
-                                <Label Text="{Binding LastDate,StringFormat='{0:MM/dd/yy}'}" Grid.Column="1" />
-                                <Label Text="{Binding DateScore}"  Grid.Column="2" />
+                                    <Label Text="{Binding QualityName}" Grid.Column="0" />
+                                    <Label Text="{Binding DateScore}"  Grid.Column="1" />
                             </Grid>
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="New Date" Clicked="OnNew" />
         </StackLayout>
-	</ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>

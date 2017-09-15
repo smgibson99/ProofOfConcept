@@ -23,7 +23,7 @@ namespace ProofOfConcept.ViewModels
             }
         }
 
-        public async Task UpdateUser()
+        public async Task UpdateUserAsync()
         {
 			if (string.IsNullOrEmpty(UserId))
 				throw new Exception("UserId is blank.");
@@ -38,7 +38,7 @@ namespace ProofOfConcept.ViewModels
                 settings.User.UserName = UserName;
                 settings.User.UserEmail = UserEmail;
 
-                bool result = await service.UpdateUser(settings.User);
+                bool result = await service.UpdateUserAsync(settings.User);
 				settings.Save();
 			}
 			finally
@@ -47,7 +47,7 @@ namespace ProofOfConcept.ViewModels
 			}
         }
 
-        public async Task ChangePassword()
+        public async Task ChangePasswordAsync()
 		{
 			if (string.IsNullOrEmpty(UserId))
 				throw new Exception("UserId is blank.");
@@ -65,7 +65,7 @@ namespace ProofOfConcept.ViewModels
 
             try
             {
-                bool result = await service.ChangePassword(UserId, OldPassword, NewPassword);
+                bool result = await service.ChangePasswordAsync(UserId, OldPassword, NewPassword);
                 settings.Save();
             } finally
             {
