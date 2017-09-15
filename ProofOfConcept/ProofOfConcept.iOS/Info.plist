@@ -51,7 +51,7 @@
 	<key>CFBundleName</key>
 	<string>ProofOfConcept</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0a</string>
+	<string>1.0b</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
